@@ -1,0 +1,39 @@
+package problem158;
+
+//read n characters to the buffer char array using read4 function;
+//read4 read at most 4 characters from a file, and return the number of the characters read.
+//This read function may be called multiple times.
+public class Solution {
+	private int buffPtr=0;
+	private int buffCnt=0;
+	
+	//elements are first read into buff;
+	private char[] buff = new char[4];
+	private int read4(char[] arr){
+		return arr.length;
+	}
+	
+	public int read(char[] buf, int n){
+		int ptr=0;
+		while(ptr<n){
+			//If buffPtr is zero, all of the buff elements have been read into buf; 
+			if(buffPtr==0){
+				//buffCnt is the number of elements in buff;
+				//buffCnt is from 0 to 4;
+				buffCnt=read4(buff);
+			}
+			//if there is no elements in buff, break;
+			if(buffCnt==0) break;
+			
+			//read the buff elements into buf;
+			while(ptr<n&&buffPtr<buffCnt){
+				buf[ptr++]=buff[buffPtr++];
+			}
+			//if buffPtr is equal to buffCnt (all buff elements have been read), reset buffPtr.
+			if(buffPtr==buffCnt) buffPtr=0;
+		}
+		return ptr;
+	}
+	
+    
+}
